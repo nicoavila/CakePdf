@@ -90,8 +90,8 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
 			'page-size' => $this->_Pdf->pageSize(),
 			'encoding' => $this->_Pdf->encoding(),
 			'title' => $this->_Pdf->title(),
-			'headerUrl' => $this->_Pdf->headerUrl(),
-			'footerUrl' => $this->_Pdf->footerUrl()
+			'header-html' => $this->_Pdf->headerUrl(),
+			'footer-html' => $this->_Pdf->footerUrl()
 		);
 
 		//Sets binary path based on configuration option
@@ -117,7 +117,7 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
 		}
 		$command .= " --disable-smart-shrinking"; //Disable the intelligent shrinking strategy used by WebKit that makes the pixel/dpi ratio none constant
 		$command .= " - -";
-		//debug($command); die();
+		debug($command); die();
 		return $command;
 	}
 }
