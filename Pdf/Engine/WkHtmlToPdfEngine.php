@@ -117,7 +117,6 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
 		}
 		$command .= " --disable-smart-shrinking"; //Disable the intelligent shrinking strategy used by WebKit that makes the pixel/dpi ratio none constant
 		$command .= " - -";
-		debug($command); die();
 		return $command;
 	}
 }
