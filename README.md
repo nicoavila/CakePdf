@@ -3,7 +3,10 @@
 [![Build Status](https://travis-ci.org/FriendsOfCake/CakePdf.svg?branch=master)](https://travis-ci.org/FriendsOfCake/CakePdf)
 [![License](https://poser.pugx.org/FriendsOfCake/CakePdf/license.png)](https://packagist.org/packages/FriendsOfCake/CakePdf)
 
-Plugin containing CakePdf lib which will use a PDF engine to convert HTML to PDF.
+Plugin containing CakePdf lib which will use a PDF engine to convert HTML to PDF. This is a modified version with new features:
+* Accepts a WkHtmlToPdf binary route param in options configuration
+* Accepts a headerUrl param in options configuration
+* Accepts a footerUrl param in options configuration
 
 Current engines:
 * DomPdf
@@ -33,7 +36,7 @@ _[GIT Submodule]_
 
 In your app directory type:
 ```bash
-git submodule add git://github.com/friendsofcake/CakePdf.git Plugin/CakePdf
+git submodule add git://github.com/nicoavila/CakePdf.git Plugin/CakePdf
 git submodule init
 git submodule update
 ```
@@ -42,14 +45,7 @@ _[GIT Clone]_
 
 In your plugin directory type
 ```bash
-git clone git://github.com/friendsofcake/CakePdf.git CakePdf
-```
-
-_[Composer]_
-
-In your app directory type
-```bash
-composer require friendsofcake/cakepdf
+git clone git://github.com/nicoavila/CakePdf.git CakePdf
 ```
 
 ## Setup
@@ -83,6 +79,7 @@ Example:
 <?php
     Configure::write('CakePdf', array(
         'engine' => 'CakePdf.WkHtmlToPdf',
+        'wkhtmltopdf_path' => '/usr/local/bin/wkhtmltopdf',
         'options' => array(
             'print-media-type' => false,
             'outline' => true,
@@ -95,6 +92,8 @@ Example:
             'top' => 45
         ),
         'orientation' => 'landscape',
+        'headerUrl' => 'http://www.example.com',
+        'footerUrl' => 'http://www.anotherexample.com',
         'download' => true
     ));
 ?>

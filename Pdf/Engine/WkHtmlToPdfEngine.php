@@ -9,7 +9,7 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
  * @access protected
  * @var string
  */
-	protected $binary = '/usr/bin/wkhtmltopdf';
+	protected $binary = '/usr/local/bin/wkhtmltopdf';
 
 /**
  * Constructor
@@ -89,8 +89,13 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
 			'orientation' => $this->_Pdf->orientation(),
 			'page-size' => $this->_Pdf->pageSize(),
 			'encoding' => $this->_Pdf->encoding(),
-			'title' => $this->_Pdf->title()
+			'title' => $this->_Pdf->title(),
+			'headerUrl' => $this->_Pdf->headerUrl(),
+			'footerUrl' => $this->_Pdf->footerUrl()
 		);
+
+		//Sets binary path based on configuration option
+		$this->binary = $this->_Pdf->wkhtmltopdf_path();
 
 		$margin = $this->_Pdf->margin();
 		foreach ($margin as $key => $value) {
@@ -110,8 +115,9 @@ class WkHtmlToPdfEngine extends AbstractPdfEngine {
 				$command .= sprintf(' --%s %s', $key, escapeshellarg($value));
 			}
 		}
+		$command .= " --disable-smart-shrinking"; //Disable the intelligent shrinking strategy used by WebKit that makes the pixel/dpi ratio none constant
 		$command .= " - -";
-
+		//debug($command); die();
 		return $command;
 	}
 }

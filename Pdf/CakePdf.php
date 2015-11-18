@@ -164,6 +164,26 @@ class CakePdf {
  */
 	protected $_allow = false;
 
+/**
+ * Header URL to render
+ *
+ * @var string
+ */
+	protected $_headerUrl = null;
+
+/**
+ * Footer URL to render
+ *
+ * @var string
+ */
+	protected $_footerUrl = null;
+
+/**
+ * WkhtmlToPdf path
+ *
+ * @var string
+ */
+	protected $_wkhtmltopdfPath = null;
 
 /**
  * Available permissions
@@ -199,7 +219,7 @@ class CakePdf {
 			$this->crypto($config['crypto'])->config($config);
 		}
 
-		$options = array('pageSize', 'orientation', 'margin', 'title', 'encoding', 'protect', 'userPassword', 'ownerPassword', 'permissions', 'cache');
+		$options = array('pageSize', 'orientation', 'margin', 'title', 'encoding', 'protect', 'userPassword', 'ownerPassword', 'permissions', 'cache', 'headerUrl', 'footerUrl', 'wkhtmltopdf_path');
 		foreach ($options as $option) {
 			if (isset($config[$option])) {
 				$this->{$option}($config[$option]);
@@ -500,6 +520,48 @@ class CakePdf {
 	}
 
 /**
+ * Get/Set header URL to render.
+ *
+ * @param null|string $title
+ * @return mixed
+ */
+	public function headerUrl($headerUrl = null) {
+		if ($headerUrl === null) {
+			return $this->_headerUrl;
+		}
+		$this->_headerUrl = $headerUrl;
+		return $this;
+	}
+
+/**
+ * Get/Set footer URL to render.
+ *
+ * @param null|string $title
+ * @return mixed
+ */
+	public function footerUrl($footerUrl = null) {
+		if ($footerUrl === null) {
+			return $this->_footerUrl;
+		}
+		$this->_footerUrl = $footerUrl;
+		return $this;
+	}
+
+/**
+ * Get/Set WkhtmlToPdf path.
+ *
+ * @param null|string $title
+ * @return mixed
+ */
+	public function wkhtmltopdf_path($wkhtmltopdfPath = null) {
+		if ($wkhtmltopdfPath === null) {
+			return $this->_wkhtmltopdfPath;
+		}
+		$this->_wkhtmltopdfPath = $wkhtmltopdfPath;
+		return $this;
+	}
+
+/**
  * Get/Set protection.
  *
  * @param null|boolean $protect
@@ -553,7 +615,6 @@ class CakePdf {
  * none: allow no permissions
  * array: list of permissions that are allowed
  *
-
  * @param null|bool|array $permissions
  * @return mixed
  */
