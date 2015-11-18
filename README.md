@@ -64,6 +64,7 @@ The value for engine should have the `Plugin.ClassName` format without the Engin
 
 Configuration options:
 * engine: Engine to be used (required)
+* wkhtmltopdf_path: WkhtmlToPdf path
 * options: Engine options, this may vary between Engines
 * pageSize: Change the default size, defaults to A4
 * orientation: Change the default orientation, defaults to potrait
@@ -73,6 +74,8 @@ Configuration options:
 * binary: Path to binary (WkHtmlToPdfEngine only), defaults to /usr/bin/wkhtmltopdf
 * download: Set to true to force a download, only when using PdfView
 * filename: Filename for the document when using forced download
+* headerUrl: URL to render in header
+* footerUrl: URL to render in footer 
 
 Example:
 ```php
